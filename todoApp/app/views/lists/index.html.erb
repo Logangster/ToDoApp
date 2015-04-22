@@ -22,7 +22,8 @@
       <th>TASKS</th>
       <% list.tasks.each do |task| %>
         <tr>
-        <td><%= task.title %></td>
+            <td><%= task.title %></td>
+            <td><%= link_to "View Task", list_task_path(list, task) %>
         </tr>
       <% end %>
       </tr>
