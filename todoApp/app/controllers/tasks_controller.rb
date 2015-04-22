@@ -14,7 +14,8 @@ class TasksController < ApplicationController
 
   # GET /tasks/new
   def new
-    @task = Task.new
+    @list = List.find(params[:list_id]);
+    @task = @list.tasks.build
   end
 
   # GET /tasks/1/edit
@@ -24,11 +25,13 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.json
   def create
-    @task = Task.new(task_params)
+    @list = List.find(params[:list_id]);
+    @task = @list.tasks.build(task_params)
+    
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to @task, notice: 'Task was successfully created.' }
+        format.html { redirect_to list_task_path(@list,@task), notice: 'Task was successfully created.' }
         format.json { render :show, status: :created, location: @task }
       else
         format.html { render :new }
@@ -64,11 +67,12 @@ class TasksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_task
+      @list = List.find(params[:list_id])
       @task = Task.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:task).permit(:title, :description, :due, :status)
+      params.require(:task).permit(:title, :description, :due, :status, :list)
     end
 end

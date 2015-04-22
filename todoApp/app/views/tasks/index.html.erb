@@ -1,7 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Tasks</h1>
-
+<h1>Listing Tasks</h1> 
 <table>
   <thead>
     <tr>
@@ -20,9 +19,9 @@
         <td><%= task.description %></td>
         <td><%= task.due %></td>
         <td><%= task.status %></td>
-        <td><%= link_to 'Show', task %></td>
-        <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', list_tasks_path(task) %></td>
+        <td><%= link_to 'Edit', "#" %></td>
+        <td><%= link_to 'Destroy', "#", method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +29,3 @@
 
 <br>
 
-<%= link_to 'New Task', new_task_path %>
