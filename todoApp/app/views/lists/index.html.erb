@@ -21,11 +21,15 @@
       <tr>
       <th>TASKS</th>
       <% list.tasks.each do |task| %>
-        <tr><td><%= task.title %></td></tr>
+        <tr>
+        <td><%= task.title %></td>
+        </tr>
       <% end %>
       </tr>
   </tbody>
 </table>
+<%= link_to "Add Task", new_list_task_path(list) %>
+<br>
 <br>
     <% end %>
 
