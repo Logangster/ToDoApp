@@ -2,37 +2,39 @@
 
 <h1>Listing Lists</h1>
 
+<% @lists.each do |list| %>
 
-    <% @lists.each do |list| %>
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-    <tbody>
-      <tr>
-        <td><%= list.title %></td>
-        <td><%= link_to 'Show', list %></td>
-        <td><%= link_to 'Edit', edit_list_path(list) %></td>
-        <td><%= link_to 'Destroy', list, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-      <tr>
-      <th>TASKS</th>
-      <% list.tasks.each do |task| %>
+  <!-- Each list will have its own div panel to look like a self-contained card -->
+  <div class="panel panel-primary">
+
+    <!-- Heading links to the list's view -->
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= link_to list.title, list %></h3>
+    </div>
+
+    <!-- Show the list's items -->
+    <table class="table table-striped table-condensed table-hover">
+      <tbody>
+        <% list.tasks.each do |task| %>
+          <tr>
+            <td><%= link_to task.title, list_task_path(list, task) %></td>
+            <td><%= task.due %></td>
+          </tr>
+        <% end %>
+      </tbody>
+      <tfoot>
         <tr>
-            <td><%= task.title %></td>
-            <td><%= link_to "View Task", list_task_path(list, task) %>
+          <td><%= link_to "Add Task", new_list_task_path(list) %></td>
         </tr>
-      <% end %>
-      </tr>
-  </tbody>
-</table>
-<%= link_to "Add Task", new_list_task_path(list) %>
-<br>
-<br>
-    <% end %>
+      </tfoot>
+    </table>
+
+    <!-- Footer gives you the option to delete the list -->
+    <div class="panel-footer">
+      <%= link_to 'Delete', list, method: :delete, data: { confirm: 'Are you sure?' } %>
+    </div>
+  </div>
+<% end %>
 
 <br>
 <%= link_to 'New List', new_list_path %>
