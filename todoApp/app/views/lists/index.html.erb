@@ -40,7 +40,14 @@ Or click the "New List" button on the navbar to create another list.</p>
 
     <!-- Footer gives you the option to delete the list -->
     <div class="panel-footer">
-      <%= button_to 'Delete List', list, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+      <div class="clearfix">
+        <%= button_to 'Add Task', new_list_task_path(list), :class => "btn btn-success pull-left" %>
+        <div class="btn-group pull-right">
+        <%= link_to 'View', list, :class => "btn btn-primary", :method => :get %>
+        <%= link_to 'Edit', edit_list_path(list), :class => "btn btn-warning", :method => :get %>
+        <%= link_to 'Delete List', list, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+        </div>
+      </div>
     </div>
   </div>
 <% end %>

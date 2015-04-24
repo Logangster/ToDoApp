@@ -1,17 +1,46 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <h3>Title:</h3>
-  <%= @list.title %>
-</p>
-<h3>Tasks</h3>
-<% @list.tasks.each do |task| %>
-    <%= task.title %>
-<% end %>
-<br>
-<br>
-<%= link_to 'Add Task', new_list_task_path(@list) %>
-<br>
-<br>
-<%= link_to 'Edit', edit_list_path(@list) %> |
+<div class="panel panel-primary">
+
+    <!-- Heading links to the list's view -->
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= @list.title %></h3>
+    </div>
+
+    <!-- Show the list's items -->
+    <table class="table table-condensed table-hover">
+      <thead>
+        <tr>
+          <th>Task</th>
+          <th>Description</th>
+          <th>Due Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @list.tasks.each do |task| %>
+          <tr>
+            <td><%= link_to task.title, list_task_path(@list, task) %></td>
+            <td><%= task.description %></td>
+            <td><%= task.due %></td>
+            <td><%= task.status %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <!-- Footer gives you the option to delete the list -->
+    <div class="panel-footer">
+      <div class="clearfix">
+        <%= button_to 'Add Task', new_list_task_path(@list), :class => "btn btn-success pull-left" %>
+        <div class="btn-group pull-right">
+          <%= link_to 'Edit', edit_list_path(@list), :class => "btn btn-warning", :method => :get %>
+          <%= link_to 'Delete List', @list, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <%= link_to 'Back', lists_path %>
