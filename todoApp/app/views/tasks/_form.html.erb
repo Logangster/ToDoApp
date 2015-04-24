@@ -27,7 +27,7 @@
   </div>
   <div class="form-group">
     <%= f.label :status %><br>
-    <%= f.text_field :status, class: 'form-control' %>
+    <%= f.select :status, options_for_select(["Not Started", "In Progress", "Completed"]), class: 'form-control' %>
   </div>
   <div class="actions">
     <%= f.submit "Submit", class: "btn btn-primary" %>
