@@ -1,24 +1,33 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @task.title %>
-</p>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title"><%= @task.title %></h3>
+  </div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @task.description %>
-</p>
+  <div class="panel-body">
+    <p>
+      <strong>Description:</strong>
+      <%= @task.description %>
+    </p>
 
-<p>
-  <strong>Due:</strong>
-  <%= @task.due %>
-</p>
+    <p>
+      <strong>Due:</strong>
+      <%= @task.due %>
+    </p>
 
-<p>
-  <strong>Status:</strong>
-  <%= @task.status %>
-</p>
+    <p>
+      <strong>Status:</strong>
+      <%= @task.status %>
+    </p>
+  </div>
 
-<%= link_to 'Edit', edit_list_task_path(@list, @task) %> |
+  <div class="panel-footer clearfix">
+      <div class="btn-group pull-right">
+        <%= link_to 'Edit', edit_list_task_path(@list, @task), :class => "btn btn-warning", :method => :get %>
+        <%= link_to 'Delete', '#', :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+      </div>
+  </div>
+</div>
+
 <%= link_to 'Back', list_tasks_path %>
