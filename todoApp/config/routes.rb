@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :lists do
       resources :tasks
+      get 'updatestatus/:id' => 'tasks#markDone'
   end
   
   root 'pages#index'

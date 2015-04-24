@@ -1,5 +1,11 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [:show, :edit, :update, :destroy, :markDone]
+
+  def markDone
+    @task.status = "Done"
+    @task.save
+    redirect_to lists_path
+  end
 
   # GET /tasks
   # GET /tasks.json
@@ -14,6 +20,7 @@ class TasksController < ApplicationController
 
   # GET /tasks/new
   def new
+    #Get list and build a task based on the list
     @list = List.find(params[:list_id]);
     @task = @list.tasks.build
   end
@@ -25,9 +32,9 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.json
   def create
+    #Get list and build a task based on the list
     @list = List.find(params[:list_id]);
     @task = @list.tasks.build(task_params)
-    
 
     respond_to do |format|
       if @task.save
