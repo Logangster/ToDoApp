@@ -32,7 +32,12 @@ Or click the "New List" button on the navbar to create another list.</p>
             <td><%= task.description %></td>
             <td><%= task.due %></td>
             <!-- only show done if the status isn't done -->
-            <td><%= task.status %><%= link_to ' - Done', list_update_status_path(list, task) if task.status != "Done" %></td>
+            <td>
+              <%= task.status %>
+              <div class="btn-group">
+              <%= link_to 'Completed', list_update_status_done_path(list, task), :class => "btn btn-default btn-xs" %>
+              </div>
+            </td>
           </tr>
         <% end %>
       </tbody>

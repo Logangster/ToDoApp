@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :lists do
       resources :tasks
-      get 'updatestatus/:id' => 'tasks#markDone', as: :update_status
+      get 'updatestatusdone/:id' => 'tasks#markDone', as: :update_status_done
   end
   
   root 'pages#index'

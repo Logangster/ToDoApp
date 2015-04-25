@@ -3,7 +3,7 @@ class TasksController < ApplicationController
 
   #Used for marking status updates as done
   def markDone
-    @task.status = "Done"
+    @task.status = "Completed"
     @task.save
     redirect_to lists_path
   end
