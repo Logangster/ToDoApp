@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy, :markDone]
 
+  #Used for marking status updates as done
   def markDone
     @task.status = "Done"
     @task.save
@@ -8,13 +9,12 @@ class TasksController < ApplicationController
   end
 
   # GET /tasks
-  # GET /tasks.json
   def index
-    @tasks = Task.all
+    #no need to show the tasks index with the lists view in place
+    redirect_to lists_path
   end
 
   # GET /tasks/1
-  # GET /tasks/1.json
   def show
   end
 
@@ -30,7 +30,6 @@ class TasksController < ApplicationController
   end
 
   # POST /tasks
-  # POST /tasks.json
   def create
     #Get list and build a task based on the list
     @list = List.find(params[:list_id]);
@@ -48,7 +47,6 @@ class TasksController < ApplicationController
   end
 
   # PATCH/PUT /tasks/1
-  # PATCH/PUT /tasks/1.json
   def update
     respond_to do |format|
       if @task.update(task_params)
@@ -62,7 +60,6 @@ class TasksController < ApplicationController
   end
 
   # DELETE /tasks/1
-  # DELETE /tasks/1.json
   def destroy
     @task.destroy
     respond_to do |format|
